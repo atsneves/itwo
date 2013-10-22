@@ -1,0 +1,4 @@
+body{padding-top: 30px;}
+#topo{padding: 20px 0 10px; background: #333;}
+#topo h1, #topo p{color: #FFF;}
+.error{color:#DD2222}

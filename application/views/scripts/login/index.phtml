@@ -1,0 +1,34 @@
+<br />
+<br /><br />
+<div class="container">
+    <form class="well" method="POST" action="">
+        <h2>Acesso restrito</h2>
+        <?php echo $this->FlashMessenger();?>
+
+        <label for="login">Login: </label>
+        <?php echo $this->form->login; ?>
+        <br>
+
+        <label for="senha">Senha: </label>
+        <?php echo $this->form->senha; ?>
+        <br>
+        <?php echo $this->form->Entrar; ?>
+    </form>
+</div>
+<script>
+$(document).ready(function(){
+    <?php if(!isset($this->editar)):?>
+    $('form').validate({
+        rules:{
+            login:{required: true},
+            senha:{required: true}
+        },
+
+        messages:{
+            login:{required: "Preencha o campo Login"},
+            senha:{required: "Preencha o campo Senha"}
+        }
+    });
+    <?php endif;?>
+});
+</script>

@@ -1,0 +1,32 @@
+<header id="topo">
+    <div class="container">
+        <h1>Pesquisa</h1>
+        <p class="lead">Cadastre ou altere resposta nessa página.</p>
+    </div>
+</header>
+
+<div class="container">
+    <form class="well" method="POST" action="" >
+        <label for="resposta">Resposta: </label>
+        <?php echo $this->form->resposta; ?><br>
+        
+        <?php echo $this->form->resposta_id; ?><br>
+
+        <?php echo $this->form->salvar; ?>
+    </form>
+</div>
+<script>
+$(document).ready(function(){
+    <?php if(!isset($this->editar)):?>
+    $('form').validate({
+        rules:{
+            resposta:{required: true}
+        },
+
+        messages:{
+            resposta:{required: "Preencha o campo Resposta"}
+        }
+    });
+    <?php endif;?>
+});
+</script>

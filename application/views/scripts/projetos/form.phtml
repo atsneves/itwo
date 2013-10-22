@@ -1,0 +1,77 @@
+<header id="topo">
+    <div class="container">
+        <h1>Projeto</h1>
+        <p class="lead">Cadastre ou altere projetos nessa página.</p>
+    </div>
+</header>
+
+<div class="container">
+    <form class="well" method="POST" action="" >
+        <label for="nome">Nome: </label>
+        <?php echo $this->form->nome; ?><br>
+        
+        <label for="login">Login: </label>
+        <?php echo $this->form->login; ?><br>
+        
+        <label for="senha">Senha: </label>
+        <?php echo $this->form->senha; ?><br>
+       
+        <label for="textofixo">Texto Fixo: </label>
+        <?php echo $this->form->textofixo; ?>
+        
+        <label for="texto">Texto: </label>
+        <?php echo $this->form->texto; ?><br>
+        
+        <label for="textofixo">Votação? </label>
+        <?php echo $this->form->votacao; ?>
+        
+        <label for="texto">Link da votação: </label>
+        <?php echo $this->form->link_votacao; ?><br>
+        
+        <label for="fanpage">Fanpage: </label>
+        <?php echo $this->form->fanpage; ?><br>
+        
+        <label for="fanpage_id">Fanpage ID: </label>
+        <?php echo $this->form->fanpage_id; ?><br>
+        
+        <label for="fanpage_id">Pesquisa: </label>
+        <?php echo $this->form->pesquisa_id; ?><br>
+        
+
+        <?php echo $this->form->salvar; ?>
+    </form>
+</div>
+<script>
+$(document).ready(function(){
+    <?php if(!isset($this->editar)):?>
+    $('form').validate({
+        rules:{
+            nome:{required: true},
+            login:{required: true},
+            senha:{required: true},
+            fanpage:{required: true},
+            fanpage_id:{required: true}
+        },
+
+        messages:{
+            nome:{required: "Preencha o campo Nome"},
+            login:{required: "Preencha o campo Login"},
+            senha:{required: "Preencha o campo Senha"},
+            fanpage:{required: "Preencha o campo Fanpage"},
+            fanpage_id:{required: "Preencha o campo Fanpage ID"}
+        }
+    });
+    <?php endif;?>
+        
+    $('#login').focusout(function(){
+        var obj = $(this);
+        $.post('/portal/public/pesquisas/verificalogin',{login: $(obj).val()},function(data){
+            if($.trim(data) == 'existe'){
+                alert('Login Existente');
+                $(obj).val('');
+                $(obj).focus();
+            }
+        });
+    });
+});
+</script>

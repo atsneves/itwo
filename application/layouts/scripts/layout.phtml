@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Administrativo</title>
+    <link rel="stylesheet" type="text/css" href="/portal/public/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/portal/public/css/style.css" />
+    <link href="/portal/public/css/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/portal/public/js/jquery.js"></script>
+    <script type="text/javascript" src="/portal/public/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/portal/public/js/scripts.js"></script>
+    <script type="text/javascript" src="/portal/public/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/portal/public/js/jquery.validate.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/portal/public/"><img src="http://www.itwo.com.br/portal/application/layouts/scripts/imagens/logo.png" alt="iTwo"/>  - Sistema Administrativo</a>
+                <?php 
+                    if(!isset($this->login)):
+                        $projetosActive = '';
+                        $pesquisasActive = '';
+                        if($this->pag == 'projetos'){
+                            $projetosActive = 'active';
+                        }elseif($this->pag == 'pesquisas'){
+                            $pesquisasActive = 'active';
+                        }
+                ?>
+                <ul class="nav nav-pills">
+                    <li class="<?php echo $projetosActive;?>"><a href="/portal/public/projetos">Projetos</a></li>
+                    <li class="<?php echo $pesquisasActive;?>"><a href="/portal/public/pesquisas">Pesquisas</a></li>
+                    <li><a href="/portal/public/login/sair">Sair</a></li>
+                </ul>
+                <?php endif;?>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+<?php echo $this->layout()->content; ?>
+        
+    
+    <?php if(!isset($this->login)):?>
+    <footer class="modal-footer">
+        <div class="container">
+            <p>
+               Twob Digital - © 2013 - Todos os direitos reservados 
+            </p>
+        </div>
+    </footer>
+    <?php endif;?>
+</body>
+</html>

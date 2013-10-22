@@ -1,0 +1,45 @@
+<header id="topo">
+    <div class="container">
+        <h1>Pesquisa: <?php echo $this->pesquisa->nome;?></h1>
+        <p class="lead">Lista com todas Perguntas.</p>
+    </div>
+</header>
+
+<div class="container">
+    <p>
+        <br>
+        <a class="btn btn-inverse" href="/portal/public/pesquisas/formpergunta/idpesquisa/<?php echo $this->pesquisa->id;?>">
+            <i class="icon-plus icon-white"></i> Adicionar
+        </a>
+    </p>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pergunta</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                if($this->perguntas):
+                foreach ($this->perguntas as $data): 
+            ?>
+            <tr>
+                <td><?php echo $data['pergunta'];?></td>
+                <td>
+                    <a class="icon-th-list" title="Ver Respostas" href="/portal/public/pesquisas/respostas/id/<?php echo $data['id'];?>"></a>
+                    <a class="icon-edit" title="Editar Pergunta" href="/portal/public/pesquisas/formpergunta/id/<?php echo $data['id'];?>"></a>
+                    <a class="icon-remove" 
+                       title="Excluir Pergunta" 
+                       href="/portal/public/pesquisas/deletepergunta/id/<?php echo $data['id'];?>/idpesquisa/<?php echo $this->pesquisa->id;?>">
+                    </a>
+                </td>
+            </tr>
+            <?php 
+                    endforeach;
+                endif;
+            ?>
+        </tbody>
+    </table>
+</div>

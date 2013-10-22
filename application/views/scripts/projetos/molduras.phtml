@@ -1,0 +1,59 @@
+<header id="topo">
+    <div class="container">
+        <h1>Molduras</h1>
+        <p class="lead">Projeto <?php echo $this->projeto->nome;?></p>
+    </div>
+</header>
+
+<div class="container">    
+    <form class="well" id="formMolduras" action="/portal/public/projetos/upload/projeto/<?php echo $this->projeto->id;?>" method="post" enctype="multipart/form-data">
+        <input class="" type='file' name="moldura" id="moldura" />
+    </form>
+    
+    
+    <div class="row-fluid">
+        <ul class="thumbnails">
+            <?php if($this->molduras):?>
+            <?php foreach($this->molduras as $moldura):?>
+            <li class="span3"><a href="#" id="<?php echo $moldura->id;?>" class="icon-remove"></a>
+            <div class="thumbnail">
+                <img src="/portal/public/molduras/<?php echo $moldura->moldura;?>" alt="Moldura" data-src="holder.js/300x2000" style="width: 300px; height: 200px;" >
+            </div>
+            </li>
+            <?php endforeach;?>
+            <?php endif;?>
+        </ul>
+    </div>
+    
+</div>
+<script>
+$(document).ready(function(){
+    $('#topo').css('background','#118811');
+    $('#moldura').bind('change',function(){
+        var thismoldura = this;
+        if(verifica_extencao($(this))){
+           $(thismoldura).closest('form').ajaxSubmit(function(data){
+               var inf = data.split('##');
+               
+               var html = '<li class="span3">';
+               html += '<a href="#" id="'+inf[0]+'" class="icon-remove"></a>';
+               html += '<div class="thumbnail">';
+               html += '<img src="/portal/public/molduras/'+inf[1]+'" alt="Moldura" data-src="holder.js/300x2000" style="width: 300px; height: 200px;" >';
+               html += '</div>';
+               html += '</li>';
+               
+               $('.thumbnails').append(html);
+           });
+        }else{
+            $(thismoldura).after('<div id="erroupload" class="alert alert-error">Formato não suportado.</div>');
+        }
+    });
+    
+    $('.thumbnails .icon-remove').live('click',function(){
+        var item = this;
+        $.post('/projetos/deletemoldura',{id: $(this).attr('id')},function(){
+            $(item).parent().remove();
+        });
+    });
+});
+</script>

@@ -1,0 +1,51 @@
+<header id="topo">
+    <div class="container">
+        <h1>Pesquisa</h1>
+        <p class="lead">Cadastre ou altere pesquisa nessa página.</p>
+    </div>
+</header>
+
+<div class="container">
+    <form class="well" method="POST" action="" >
+        <label for="nome">Nome: </label>
+        <?php echo $this->form->nome; ?><br>
+        
+        <label for="login">Login: </label>
+        <?php echo $this->form->login; ?><br>
+        
+        <label for="senha">Senha: </label>
+        <?php echo $this->form->senha; ?><br>
+
+        <?php echo $this->form->salvar; ?>
+    </form>
+</div>
+<script>
+$(document).ready(function(){
+    <?php if(!isset($this->editar)):?>
+    $('form').validate({
+        rules:{
+            nome:{required: true},
+            login:{required: true},
+            senha:{required: true}
+        },
+
+        messages:{
+            nome:{required: "Preencha o campo Nome"},
+            login:{required: "Preencha o campo Login"},
+            senha:{required: "Preencha o campo Senha"}
+        }
+    });
+    <?php endif;?>
+        
+    $('#login').focusout(function(){
+        var obj = $(this);
+        $.post('/portal/public/pesquisas/verificalogin',{login: $(obj).val()},function(data){
+            if($.trim(data) == 'existe'){
+                alert('Login Existente');
+                $(obj).val('');
+                $(obj).focus();
+            }
+        });
+    });
+});
+</script>

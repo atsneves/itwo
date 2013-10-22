@@ -1,0 +1,57 @@
+<br />
+<br />
+<br />
+<header id="topo">
+    <div class="container">
+        <h1>Projetos</h1>
+        <p class="lead">Lista com todos Projetos.</p>
+    </div>
+</header>
+
+<div class="container">
+    <p>
+        <br>
+        <a class="btn btn-inverse" href="/portal/public/projetos/form">
+            <i class="icon-plus icon-white"></i> Adicionar
+        </a>
+    </p>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Login</th>
+                <th>Senha</th>
+                <th>Texto Fixo</th>
+                <th>Texto</th>
+                <th>Fanpage</th>
+                <th>Fanpage Id</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                if($this->projetos):
+                foreach ($this->projetos as $data): 
+            ?>
+            <tr>
+                <td><?php echo $data['nome'];?></td>
+                <td><?php echo $data['login'];?></td>
+                <td><?php echo $data['senha'];?></td>
+                <td><?php echo ($data['textofixo']) ? 'sim' : 'não';?></td>
+                <td><?php echo $data['texto'];?></td>
+                <td><?php echo $data['fanpage'];?></td>
+                <td><?php echo $data['fanpage_id'];?></td>
+                <td>
+                    <a class="icon-camera" title="Ver Molduras" href="/portal/public/projetos/molduras/id/<?php echo $data['id'];?>"></a>
+                    <a class="icon-edit" title="Editar Projeto" href="/portal/public/projetos/form/id/<?php echo $data['id'];?>"></a>
+                    <a class="icon-remove" title="Excluir Projeto" href="/portal/public/projetos/deleteprojeto/id/<?php echo $data['id'];?>"></a>
+                </td>
+            </tr>
+            <?php 
+                    endforeach;
+                endif;
+            ?>
+        </tbody>
+    </table>
+</div>
